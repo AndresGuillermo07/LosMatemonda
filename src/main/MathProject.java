@@ -57,6 +57,7 @@ public class MathProject {
         user = sc.nextLine();
         if(user.equalsIgnoreCase("")) {
             validarNombre(user);
+
         }
 
         //---------------------------------------------------------------
