@@ -68,6 +68,10 @@ public class MathProject {
             switch (menu1()){
                 case 1:
                     desition_1(selection);
+                    break;
+                case 2:
+                    desition_2(selection);
+                    break;
             }
         }
     }
@@ -125,7 +129,41 @@ public class MathProject {
     return result;
 }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
-    public static void desition_2(int selection){} // conjuntos
+    public static void desition_2(int selection){
+        System.out.println("¡Bienvenido al módulo de Operaciones con Conjuntos!\n");
+
+        // Solicitar al usuario los conjuntos
+        Set<Integer> conjunto1 = solicitarConjunto("primer");
+        Set<Integer> conjunto2 = solicitarConjunto("segundo");
+
+        // Realizar operaciones
+        Set<Integer> union = new HashSet<>(conjunto1);
+        union.addAll(conjunto2);
+
+        Set<Integer> interseccion = new HashSet<>(conjunto1);
+        interseccion.retainAll(conjunto2);
+
+        Set<Integer> diferencia = new HashSet<>(conjunto1);
+        diferencia.removeAll(conjunto2);
+
+        // Mostrar resultados
+        System.out.println("Conjunto 1: " + conjunto1);
+        System.out.println("Conjunto 2: " + conjunto2);
+        System.out.println("Unión: " + union);
+        System.out.println("Intersección: " + interseccion);
+        System.out.println("Diferencia (Conjunto1 - Conjunto2): " + diferencia);
+    }  // conjuntos
+    public static Set<Integer> solicitarConjunto(String ordinal) {
+        Set<Integer> conjunto = new HashSet<>();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el tamaño del " + ordinal + " conjunto: ");
+        int tamaño = scanner.nextInt();
+        System.out.println("Ingrese los elementos del " + ordinal + " conjunto, uno por uno:");
+        for (int i = 0; i < tamaño; i++) {
+            conjunto.add(scanner.nextInt());
+        }
+        return conjunto;
+    }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void desition_3(int selection){} // relaciones
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
