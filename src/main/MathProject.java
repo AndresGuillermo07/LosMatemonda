@@ -158,7 +158,7 @@ public class MathProject {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese el tamaño del " + ordinal + " conjunto: ");
         int tamaño = scanner.nextInt();
-        System.out.println("Ingrese los elementos del " + ordinal + " conjunto, uno por uno:");
+        System.out.println("Ingrese los elementos del " + ordinal + " conjuntos, uno por uno:");
         for (int i = 0; i < tamaño; i++) {
             conjunto.add(scanner.nextInt());
         }
