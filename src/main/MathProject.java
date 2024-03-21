@@ -1,79 +1,27 @@
 package main;
 import java.util.*;
 
+import static main.LargeTexts.*;
+
 public class MathProject {
     static Scanner sc = new Scanner(System.in);
     static String user;
-    static final String description =
-            """
-            Bienvenido al programa de Matemáticas Discretas!
-                        
-            Este programa está diseñado para ayudarte a explorar conceptos fundamentales de matemáticas discretas como:
-            
-            ✠inducción matemática.
-            
-            ✠conjuntos.
-            
-            ✠relaciones.
-            
-            ✠funciones.
-            
-            Con nuestra interfaz intuitiva y menú de opciones, podrás resolver problemas y visualizar conceptos de manera interactiva.
-            
-            Desea continuar? si/no :
-            __________________________________________________________________________________________________________________________
-            """;
-    static String description_inducction="""
-                    ¡Bienvenido al mundo de la Inducción Matemática!
-                                        
-                    La inducción matemática es como un superhéroe de las matemáticas, ¡siempre viene al rescate para
-                    demostrar la veracidad de nuestras afirmaciones! Imagina que tienes una escalera infinita y quieres
-                    probar que puedes subirla paso a paso. ¿Cómo lo haces? ¡Con la inducción matemática!
-                                        
-                    Primero, demuestras que puedes dar el primer paso (llamado caso base). Digamos que puedes subir el primer escalón sin problema.
-                    Luego, asumes que si puedes subir un escalón cualquiera, también puedes subir el siguiente (paso inductivo).
-                    Así, demuestras que, si puedes subir el escalón 𝓀, entonces puedes subir el escalón 𝓀 + 1.
-                                        
-                    Veámoslo con un ejemplo: queremos demostrar que la suma de los primeros 𝓷 números naturales es\s
-                                        
-                    n(n+1)
-                    ------
-                      2
-                    Para eso, primero verificamos que la fórmula funciona para 𝓷 = 1 (caso base: 1 =\s
-                                        
-                    1(1+1)
-                    ------
-                      2
-                    Después, asumimos que la fórmula es válida para 𝓷 = 𝓴 y demostramos que es válida para 𝓷 = 𝓴 + 1.
-                                        
-                    ¡Así de poderosa es la inducción matemática! Nos permite resolver problemas de manera estructurada y confiable, escalón por escalón
-                    """;
     static int selection = 0;
     static int numeroN = 0;
-    static String hacerPrueba = "";
     public static void main(String[] args) {
-
+    start(user);
+    }
+    public static void name(){
         System.out.print("Bienvenido, por favor ingrese su nombre: ");
         user = sc.nextLine();
         if(user.equalsIgnoreCase("")) {
             validarNombre(user);
-
         }
-
-        //---------------------------------------------------------------
         clearScreen();
-        // start
-        if (welcome(user,description)){
-            clearScreen();
-            switch (menu1()){
-                case 1:
-                    desition_1(selection);
-            }
-        }
     }
     // ---------------------------------------------------------------
-    public static boolean welcome(String user ,String description){
-        System.out.print(description);
+    public static boolean welcome(String user ,String DESCRIPTION){
+        System.out.print(DESCRIPTION);
         System.out.print("--> ");
         String answer = sc.nextLine();
         if (answer.equalsIgnoreCase("si")){
@@ -84,46 +32,93 @@ public class MathProject {
             return false;
     }
     // -----------------------------------------------------------------
-    public static int menu1(){
-        System.out.println("""
-                ¡Explora el fascinante mundo de las matemáticas discretas con nuestro programa interactivo!
-                
-                1. Inducción Matemática
-                2. Operaciones con Conjuntos 
-                3. Explorar Relaciones
-                4.Funciones Matemáticas
-                _____________________________________________________________________________________________
-                """);
-         System.out.print("Elige una opción del menú para comenzar (1 - 4): ");
-         selection = sc.nextInt();
-         if(selection < 1 || selection > 4) {
-             validacionSeleccionMenu1(selection);
-             return selection;
-         }
+    public static void start(String user){
+        name();
+        if (welcome(user,DESCRIPTION)){
+            clearScreen();
+            menu1();
+            switch (eleccion_menu1()){
+                case 1:
+                    desition_1(user);
+            }
+        }
+//        clearScreen();
+    }
+    public static void menu1(){
+        System.out.println(MENU1);
+    }
+    public static int eleccion_menu1(){
+        System.out.print("Elige una opción del menú para comenzar (1 - 4): ");
+        selection = sc.nextInt();
+
+        if(selection < 1 || selection > 4) {
+            validacionSeleccionMenu1(selection);
+            return selection;
+        }
         return selection;
     }
     // ----------------------------------------------------------------------------------------------
-    public static void desition_1(int selection){
+    public static void desition_1(String user){
         clearScreen();
-            System.out.println(description_inducction);
-
+            System.out.println(DESCRIPTION_INDUCCION);
+        System.out.println("---------------------------------------------------------------------------------");
             System.out.print("Deseas hacer pruebas con la suma de los primeros 𝓷 numeros naturales? si/no : ");
-            hacerPrueba = sc.nextLine(); // problema - bug, no lee el scanner
+            String hacerPrueba = sc.nextLine(); // problema - bug, no lee el scanner
+            String preguntaPrueba = sc.nextLine();
 
-            verEjemplo1(hacerPrueba);
+        if (preguntaPrueba.equalsIgnoreCase("si")) {
+            ejemplo1();
+            clearScreen();
+            System.out.print("Deseas intentar algo mas? (si/no): ");
+            String pregunta2 = sc.nextLine();
 
+            if (pregunta2.equalsIgnoreCase("si")){
+                inducctionMenu();
+            }else
+                mensajeDespedida(user);
+        }else{
+            switch (inducctionMenu2()) {
+                case 1:
+                    menu1();
+                case 2:
+                    mensajeDespedida(user);
+            }
+        }
     } // induccion
-    public static int ejemplo1(int numeroN){
+    public static void inducctionMenu(){
+        System.out.println(INDUCCTION_MENU);
+        int preguntaMenuInducction = sc.nextInt();
+        switch (preguntaMenuInducction){
+            case 1:
+                ejemplo1();
+        }
+    }
+    public static int inducctionMenu2(){
+        clearScreen();
+        System.out.println(INDUCCTION_MENU2);
+        System.out.print("Qué opcion elige?: ");
+        int pregunta3 = sc.nextInt();
+        return pregunta3;
+    }
+    public static int ejemplo1_process(int numeroN){
         //caso base
     if(numeroN == 1){
         System.out.println("Su resultado es " + numeroN);
         return 1;
     }
     // paso inductivo
-    int result = numeroN + ejemplo1(numeroN - 1);
+    int result = numeroN + ejemplo1_process(numeroN - 1);
     System.out.println("Su resultado es " + result);
     return result;
 }
+    public static void ejemplo1(){
+            System.out.print("ingrese los primeros 𝓷 numeros que desea sumar: ");
+            numeroN = sc.nextInt();
+            ejemplo1_process(numeroN);
+    }
+    public static int ejemplo2_desition1(int NumeroN){
+        return 0;
+    }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void desition_2(int selection){} // conjuntos
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -151,12 +146,5 @@ public class MathProject {
             selection = sc.nextInt();
         return selection;
     }
-    public static void verEjemplo1(String hacerPrueba){
 
-        if (hacerPrueba.equalsIgnoreCase("si")) {
-            System.out.print("ingrese los primeros 𝓷 numeros que desea sumar: ");
-            numeroN = sc.nextInt();
-            ejemplo1(numeroN);
-        }
-    }
 }
