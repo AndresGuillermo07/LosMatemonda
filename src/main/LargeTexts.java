@@ -3,22 +3,22 @@ package main;
 public class LargeTexts {
     public static final String DESCRIPTION =
             """
-            Bienvenido al programa de Matemáticas Discretas!
-                        
-            Este programa está diseñado para ayudarte a explorar conceptos fundamentales de matemáticas discretas como:
-            
-            ✠inducción matemática.
-            
-            ✠conjuntos.
-            
-            ✠relaciones.
-            
-            ✠funciones.
-            
-            Con nuestra interfaz intuitiva y menú de opciones, podrás resolver problemas y visualizar conceptos de manera interactiva.
-            
-            Desea continuar? si/no :
-            __________________________________________________________________________________________________________________________
+            | Bienvenido al programa de Matemáticas Discretas!                                                                        
+            |                                                                                                                         
+            | Este programa está diseñado para ayudarte a explorar conceptos fundamentales de matemáticas discretas como:             
+            |                                                                                                                          
+            |✠ inducción matemática.                                                                                                  
+            |                                                                                                                          
+            |✠ conjuntos.                                                                                                              
+            |                                                                                                                           
+            |✠ relaciones.                                                                                                              
+            |                                                                                                                           
+            |✠ funciones.                                                                                                               
+            |                                                                                                                            
+            | Con nuestra interfaz intuitiva y menú de opciones, podrás resolver problemas y visualizar conceptos de manera interactiva. 
+            |
+            | Desea continuar? si/no :
+            ______________________________________________________________________________________________________________________________
             """;
     public static String DESCRIPTION_INDUCCION ="""
                     ¡Bienvenido al mundo de la Inducción Matemática!
@@ -58,16 +58,17 @@ public class LargeTexts {
             | --------------------------------------------------------------------------------- |
             | 1.Suma de los primeros 𝓷 numeros naturales                                        |
             | 2.Calcular el factorial de un número utilizando recursión                         |
-            | 3.Calcular la potencia de un número utilizando el método de exponenciación rápida |
+            | 3.Calcular la potencia de un número utilizando utilizando inducción               |
             | 4.Cambiar de tema                                                                 |
             | 5.Salir del programa                                                              |
             | --------------------------------------------------------------------------------- |
             """;
     public static final String INDUCCTION_MENU2 = """
             Deseas
-            | --------------------------------------------------------------------------------- |
-            | 1.Cambiar de tema                                                                 |
-            | 2. Salir                                                                          |
+            | ---------------------------------------------------------------------------------
+            | 1. Explorar diferentes ejemplos                                                   |
+            | 2.Cambiar de tema                                                                 |
+            | 3. Salir                                                                          |
             | --------------------------------------------------------------------------------- |
             """;
 }
