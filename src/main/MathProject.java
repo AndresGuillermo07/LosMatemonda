@@ -207,14 +207,44 @@ public class MathProject {
     }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void desition_2(String user){
+        Scanner scanner = new Scanner(System.in);
         clearScreen();
         System.out.println("¡Bienvenido al módulo de Operaciones con Conjuntos!\n");
 
-        // Solicitar al usuario los conjuntos
+        do {
+            realizarOperacionesConConjuntos();
+            System.out.println();
+            System.out.println("----- ¿Qué deseas hacer a continuación? -----");
+            System.out.println("1. Realizar otra operación con conjuntos");
+            System.out.println("2. Cambiar de tema");
+            System.out.println("3. Salir del programa");
+            System.out.print("\nElige una opción (1 - 3): ");
+            String decision = scanner.nextLine().trim().toLowerCase();
+
+            switch (decision) {
+                case "1":
+                    clearScreen();
+                    break;
+                case "2":
+                    clearScreen();
+                    ciclo_eleccion_menu1(user);
+                    return;
+                case "3":
+                    mensajeDespedida(user);
+                    return;
+                default:
+                    clearScreen();
+                    System.out.println("Opción no válida. Por favor, selecciona una opción válida.\n");
+            }
+        } while (true);
+    }// conjuntos
+    public static void realizarOperacionesConConjuntos() {
         Set<Integer> conjunto1 = solicitarConjunto("primer");
         Set<Integer> conjunto2 = solicitarConjunto("segundo");
 
-        // Realizar operaciones
+        mostrarResultadosConjuntos(conjunto1, conjunto2);
+    }
+    public static void mostrarResultadosConjuntos(Set<Integer> conjunto1, Set<Integer> conjunto2) {
         Set<Integer> union = new HashSet<>(conjunto1);
         union.addAll(conjunto2);
 
@@ -224,14 +254,15 @@ public class MathProject {
         Set<Integer> diferencia = new HashSet<>(conjunto1);
         diferencia.removeAll(conjunto2);
 
-        // Mostrar resultados
+        Set<Integer> complemento = calcularComplemento(conjunto1, conjunto2);
+
         System.out.println("Conjunto 1: " + conjunto1);
         System.out.println("Conjunto 2: " + conjunto2);
         System.out.println("Unión: " + union);
         System.out.println("Intersección: " + interseccion);
         System.out.println("Diferencia (Conjunto1 - Conjunto2): " + diferencia);
-
-    }  // conjuntos
+        System.out.println("Complemento de Conjunto1 respecto a Conjunto2: " + complemento);
+    }
     public static Set<Integer> solicitarConjunto(String ordinal) {
         Set<Integer> conjunto = new HashSet<>();
         Scanner scanner = new Scanner(System.in);
@@ -242,6 +273,11 @@ public class MathProject {
             conjunto.add(scanner.nextInt());
         }
         return conjunto;
+    }
+    public static Set<Integer> calcularComplemento(Set<Integer> conjunto1, Set<Integer> conjunto2) {
+        Set<Integer> complemento = new HashSet<>(conjunto2);
+        complemento.removeAll(conjunto1);
+        return complemento;
     }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void desition_3(String user) {
