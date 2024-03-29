@@ -301,14 +301,13 @@ public class MathProject {
 
     public static List<List<Integer>> solicitarRelacion() {
         List<List<Integer>> relaciones = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Ingrese los pares ordenados de la relación en el formato (número,letra):");
-        System.out.println("Por ejemplo: (1,a), (2,b), etc.");
+        sc.nextLine();
+        System.out.println("Ingrese los pares ordenados de la relación en el formato (número1,número2):");
+        System.out.println("Por ejemplo: (1,2), (3,4), etc.");
         System.out.println("Escriba 'fin' para terminar de ingresar la relación.");
 
         while (true) {
-            String entrada = scanner.nextLine().trim();
+            String entrada = sc.nextLine().trim();
 
             if (entrada.equalsIgnoreCase("fin")) {
                 break;
@@ -316,18 +315,18 @@ public class MathProject {
 
             String[] partes = entrada.split(",");
 
-            // Verificar si el formato de entrada es correcto (debe haber exactamente dos partes separadas por ',')
+            // Verifico si el formato de entrada es correcto (debe haber exactamente dos partes separadas por ',')
             if (partes.length != 2) {
-                System.out.println("Formato de entrada incorrecto. Debe ingresar los pares ordenados en el formato '(número,letra)'.");
+                System.out.println("Formato de entrada incorrecto. Debe ingresar los pares ordenados en el formato (número1,número2).");
                 continue;
             }
 
             try {
-                int numero = Integer.parseInt(partes[0].replaceAll("[^0-9]", ""));
-                int letra = (int) partes[1].charAt(0);
-                relaciones.add(Arrays.asList(numero, letra));
+                int numero1 = Integer.parseInt(partes[0].trim());
+                int numero2 = Integer.parseInt(partes[1].trim());
+                relaciones.add(Arrays.asList(numero1, numero2));
             } catch (NumberFormatException e) {
-                System.out.println("Formato de entrada incorrecto. El número debe ser un entero.");
+                System.out.println("Formato de entrada incorrecto. Ambos valores deben ser números enteros.");
                 continue;
             }
         }
@@ -337,50 +336,36 @@ public class MathProject {
 
     public static boolean[][] construirMatrizRelacion(List<List<Integer>> relaciones) {
         int maxNumero = 0;
-        int maxLetra = 0;
         for (List<Integer> relacion : relaciones) {
-            maxNumero = Math.max(maxNumero, relacion.get(0));
-            maxLetra = Math.max(maxLetra, relacion.get(1));
+            maxNumero = Math.max(maxNumero, Math.max(relacion.get(0), relacion.get(1)));
         }
 
-        boolean[][] matrizRelacion = new boolean[maxNumero][maxLetra];
+        boolean[][] matrizRelacion = new boolean[maxNumero][maxNumero];
 
         for (List<Integer> relacion : relaciones) {
-            int numero = relacion.get(0) - 1;
-            int letra = relacion.get(1) - 'a';
-            matrizRelacion[numero][letra] = true;
+            int numero1 = relacion.get(0) - 1;
+            int numero2 = relacion.get(1) - 1;
+            matrizRelacion[numero1][numero2] = true;
         }
 
         return matrizRelacion;
     }
 
-
     public static void mostrarMatrizRelacion(boolean[][] matrizRelacion) {
-        int maxColumna = 0;
-        for (int numero = 0; numero < matrizRelacion.length; numero++) {
-            for (int letra = 0; letra < matrizRelacion[0].length; letra++) {
-                if (matrizRelacion[numero][letra] && letra > maxColumna) {
-                    maxColumna = letra;
-                }
-            }
-        }
-
-        System.out.print("   ");
-        for (int letra = 0; letra <= maxColumna; letra++) {
-            System.out.printf("%3c", (char) ('a' + letra));
+        System.out.println("Matriz de Relación:");
+        System.out.print("    ");
+        for (int i = 1; i <= matrizRelacion.length; i++) {
+            System.out.printf("%4d", i);
         }
         System.out.println();
-
-        for (int numero = 0; numero < matrizRelacion.length; numero++) {
-            System.out.printf("%3d", numero + 1);
-            for (int letra = 0; letra <= maxColumna; letra++) {
-                System.out.printf("%3s", matrizRelacion[numero][letra] ? "1" : "0");
+        for (int i = 0; i < matrizRelacion.length; i++) {
+            System.out.printf("%4d", i + 1);
+            for (int j = 0; j < matrizRelacion[i].length; j++) {
+                System.out.printf("%4s", matrizRelacion[i][j] ? "1" : "0");
             }
             System.out.println();
         }
     }
-
-//   falta por arreglar errores en metodo de verificar si es transitiva
 
     public static void mostrarTipoRelacion(boolean[][] matrizRelacion) {
         boolean reflexiva = esReflexiva(matrizRelacion);
@@ -411,10 +396,6 @@ public class MathProject {
     public static boolean esSimetrica(boolean[][] matrizRelacion) {
         int n = matrizRelacion.length;
 
-        if (n != matrizRelacion[0].length) {
-            return false;
-        }
-
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (matrizRelacion[i][j] != matrizRelacion[j][i]) {
@@ -426,12 +407,11 @@ public class MathProject {
     }
 
     public static boolean esAntisimetrica(boolean[][] matrizRelacion) {
-        int filas = matrizRelacion.length;
-        int columnas = matrizRelacion[0].length;
+        int n = matrizRelacion.length;
 
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
-                if (i != j && ((matrizRelacion[i][j] && matrizRelacion[j][i]) || (!matrizRelacion[i][j] && !matrizRelacion[j][i]))) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i != j && matrizRelacion[i][j] && matrizRelacion[j][i]) {
                     return false;
                 }
             }
@@ -439,11 +419,14 @@ public class MathProject {
         return true;
     }
 
+
     public static boolean esTransitiva(boolean[][] matrizRelacion) {
-        for (int i = 0; i < matrizRelacion.length; i++) {
-            for (int j = 0; j < matrizRelacion[i].length; j++) {
+        int n = matrizRelacion.length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 if (matrizRelacion[i][j]) {
-                    for (int k = 0; k < matrizRelacion.length; k++) {
+                    for (int k = 0; k < n; k++) {
                         if (matrizRelacion[j][k] && !matrizRelacion[i][k]) {
                             return false;
                         }
@@ -453,6 +436,7 @@ public class MathProject {
         }
         return true;
     }
+
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void desition_4(int selection){} // funciones
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
