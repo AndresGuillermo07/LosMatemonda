@@ -1,4 +1,5 @@
 package main;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,6 +44,7 @@ public class MathProject {
             clearScreen();
             ciclo_eleccion_menu1(user);
         }
+//        clearScreen();
     }
     public static void ciclo_eleccion_menu1(String user){
         menu1();
@@ -489,9 +491,103 @@ public class MathProject {
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static void desition_4(String user){
+         int optionF;
+         do {
+            System.out.println("Menu Options:");
+            System.out.println("1. Calculate f(x)");
+            System.out.println("2. Calculate f^-1(x)");
+            System.out.println("3. Find Domain, Range, and Image of a function");
+            System.out.println("4. Exit");
+            System.out.print("Select an option: ");
+            optionF = sc.nextInt();
+            switch (optionF) {
+                case 1:
+                    System.out.println("Enter the function f(x) to calculate:");
+                    sc.nextLine();
+                    String functionF = sc.nextLine();
+                    calculateFunction(functionF);
+                    break;
+                case 2:
+                    System.out.println("Enter the function f^-1(x) to calculate:");
+                    sc.nextLine();
+                    String inverseFunction = sc.nextLine();
+                    calculateInverseFunction(inverseFunction);
+                    break;
+                case 3:
+                    System.out.println("Enter the function to find its domain, range, and image:");
+                    sc.nextLine();
+                    String function = sc.nextLine();
+                    findDomainRangeImage(function);
+                    break;
+                case 4:
+                    System.out.println("Exiting the program...");
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        } while (optionF != 4);
+    }
+    public static void calculateFunction(String functionF) {
 
-public static void desition_4(String user){}
-//----------------------------------------------------------------------------------------------------------------------------------------------------------
+        String regex = "^(-?\\d+(\\.\\d*)?)[ ]*x[ ]*([+-]\\d+(\\.\\d*)?)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(functionF);
+
+        if (matcher.find()) {
+            double a = Double.parseDouble(matcher.group(1));
+            double b = Double.parseDouble(matcher.group(3));
+
+
+            double x = 2;
+            double fxValue = a * x + b;
+
+
+            System.out.println("f(x) = " + functionF);
+            System.out.println("f(2) = " + fxValue);
+        } else {
+            System.err.println("The function f(x) is not in the correct format.");
+        }
+    }
+        public static void calculateInverseFunction(String inverseFunction) {
+
+        String[] fxinv = inverseFunction.split("x");
+        double c = Double.parseDouble(fxinv[0]);
+        double d = Double.parseDouble(fxinv[1]);
+
+
+        double y = 5;
+        double fxinvValue = c * y + d;
+
+
+        System.out.println("f^-1(x) = " + inverseFunction);
+        System.out.println("f^-1(5) = " + fxinvValue);
+    }
+     public static void findDomainRangeImage(String function) {
+        try {
+
+            String[] fx = function.split("x");
+            double a = Double.parseDouble(fx[0]);
+            double b = Double.parseDouble(fx[1]);
+            double c = Double.parseDouble(fx[2]);
+
+            double domain = 0;
+            double range = c;
+            double image = Double.NEGATIVE_INFINITY;
+            if (c >= 0) {
+                image = 0;
+            }
+
+
+            System.out.println("Domain: " + domain);
+            System.out.println("Range: " + range);
+            System.out.println("Image: " + image);
+        } catch (Exception e) {
+            System.err.println("The entered function is not valid. Please try again.");
+        }
+    }
+     // funciones
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public static void clearScreen(){
         for (int i = 0; i < 80; i++) {
@@ -513,6 +609,6 @@ public static void desition_4(String user){}
         selection = sc.nextInt();
         return selection;
     }
-    
+
 
 }
