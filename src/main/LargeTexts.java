@@ -71,4 +71,28 @@ public class LargeTexts {
             | 3. Salir                                                                          |
             | --------------------------------------------------------------------------------- |
             """;
+
+    public static final String MENUCONJUNTOS1 ="""
+---- ¿Que deseas realizar a continuacion? ----
+    
+  1. Realizar otra operacion de conjuntos
+  2. Cambiar de tema
+  3. Salir.
+       
+ elige una opción(1 - 3)
+""";
+
+    public static final String MENURELACIONES="""
+|--------------------------------------|
+|   ----- Menú de Opciones: -----      |
+|1. Ingresar Relación                  |
+|2. Mostrar Matriz de Relación         |
+|3. Mostrar Tipo de Relación           |
+|4. Volver al Menú Principal           |
+|______________________________________|
+Seleccione una opción:
+    
+""";
+
+
 }

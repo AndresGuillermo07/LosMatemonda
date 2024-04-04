@@ -1,5 +1,7 @@
 package main;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static main.LargeTexts.*;
 
@@ -8,9 +10,12 @@ public class MathProject {
     static String user;
     static int selection = 0;
     static int numeroN = 0;
+    static String decision="";
+    static int result = 1;
     public static void main(String[] args) {
         start(user);
     }
+
     public static void name(){
         System.out.print("Bienvenido, por favor ingrese su nombre: ");
         user = sc.nextLine();
@@ -38,7 +43,6 @@ public class MathProject {
             clearScreen();
             ciclo_eleccion_menu1(user);
         }
-//        clearScreen();
     }
     public static void ciclo_eleccion_menu1(String user){
         menu1();
@@ -52,6 +56,8 @@ public class MathProject {
             case 3:
                 desition_3(user);
                 break;
+            case 4:
+                desition_4(user);
         }
     }
     public static void menu1(){
@@ -68,6 +74,13 @@ public class MathProject {
         return selection;
     }
     // ----------------------------------------------------------------------------------------------
+    public static String preguntaEjemplo1(){
+        System.out.println("---------------------------------------------------------------------------------");
+        System.out.print("Deseas hacer pruebas con la suma de los primeros 𝓷 numeros naturales? si/no : ");
+        String hacerPrueba = sc.nextLine(); // problema - bug, no lee el scanner
+        String preguntaPrueba = sc.nextLine();
+        return preguntaPrueba;
+    }
     public static void desition_1(String user){
         clearScreen();
         System.out.println(DESCRIPTION_INDUCCION);
@@ -76,13 +89,6 @@ public class MathProject {
 
 
     } // induccion
-    public static String preguntaEjemplo1(){
-        System.out.println("---------------------------------------------------------------------------------");
-        System.out.print("Deseas hacer pruebas con la suma de los primeros 𝓷 numeros naturales? si/no : ");
-        String hacerPrueba = sc.nextLine(); // problema - bug, no lee el scanner
-        String preguntaPrueba = sc.nextLine();
-        return preguntaPrueba;
-    }
     public static void ifAndElsesDesition1(String user,String preguntaPrueba){
         if (preguntaPrueba.equalsIgnoreCase("si")) {
             ejemplo1();
@@ -98,7 +104,7 @@ public class MathProject {
         String bugPregunta2 = sc.nextLine();
         String pregunta2 = sc.nextLine();
 
-        if (pregunta2.equalsIgnoreCase("si")){
+        if (bugPregunta2.equalsIgnoreCase("si") || pregunta2.equalsIgnoreCase("si")){
             inducctionMenu(user);
         }else
             inducctionMenu2(user);
@@ -171,10 +177,15 @@ public class MathProject {
         if (numeroN == 0 || numeroN == 1) {
             return 1; // El factorial de 0 y 1 es 1
         } else {
-            int result = numeroN * ejemplo2_process(numeroN - 1); // Llamada recursiva
-            System.out.println("Su resultado es " + numeroN);
-            return result;
+            for (int i = 2; i <= numeroN; i++) {
+                result *= i;
+            }
+//             long mostrarNumeros = numeroN * ejemplo2_process(numeroN - 1); // Llamada recursiva
+//            System.out.println("Su el factorial de su numero es " + numeroN);
         }
+        System.out.println(result);
+        result = 1;
+        return result;
     }
     public static void ejemplo2(){
         clearScreen();
@@ -203,41 +214,51 @@ public class MathProject {
         System.out.print("ingrese el Exponente: ");
         int exponente = sc.nextInt();
         ejemplo3_process(base,exponente);
+        algoMasFuncion();
 
     }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void desition_2(String user){
         Scanner scanner = new Scanner(System.in);
         clearScreen();
-        System.out.println("¡Bienvenido al módulo de Operaciones con Conjuntos!\n");
+        System.out.println("¡BIENVENIDO AL MODULO DE OPERACIONES DE CONJUNTOS!\n");
 
         do {
             realizarOperacionesConConjuntos();
-            System.out.println();
-            System.out.println("----- ¿Qué deseas hacer a continuación? -----");
-            System.out.println("1. Realizar otra operación con conjuntos");
-            System.out.println("2. Cambiar de tema");
-            System.out.println("3. Salir del programa");
-            System.out.print("\nElige una opción (1 - 3): ");
-            String decision = scanner.nextLine().trim().toLowerCase();
 
-            switch (decision) {
-                case "1":
-                    clearScreen();
-                    break;
-                case "2":
-                    clearScreen();
-                    ciclo_eleccion_menu1(user);
-                    return;
-                case "3":
-                    mensajeDespedida(user);
-                    return;
-                default:
-                    clearScreen();
-                    System.out.println("Opción no válida. Por favor, selecciona una opción válida.\n");
+            System.out.print("\n¿Desea Continuar? (si/no): ");
+            String bug = sc.nextLine();
+            String pregunta = sc.nextLine();
+            if(pregunta.equalsIgnoreCase("si")) {
+                clearScreen();
+
+                switch (menu1Conjuntos()) {
+                    case "1":
+                        clearScreen();
+                        break;
+                    case "2":
+                        clearScreen();
+                        ciclo_eleccion_menu1(user);
+                        return;
+                    case "3":
+                        mensajeDespedida(user);
+                        return;
+                    default:
+                        clearScreen();
+                        System.out.println("Opción no válida. Por favor, selecciona una opción válida.\n");
+                }
+            }else{
+                mensajeDespedida(user);
             }
         } while (true);
     }// conjuntos
+
+    public static String menu1Conjuntos(){
+        System.out.println(MENUCONJUNTOS1);
+         decision = sc.nextLine().trim().toLowerCase();
+        clearScreen();
+        return decision;
+    }
     public static void realizarOperacionesConConjuntos() {
         Set<Integer> conjunto1 = solicitarConjunto("primer");
         Set<Integer> conjunto2 = solicitarConjunto("segundo");
@@ -265,12 +286,12 @@ public class MathProject {
     }
     public static Set<Integer> solicitarConjunto(String ordinal) {
         Set<Integer> conjunto = new HashSet<>();
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.print("Ingrese el tamaño del " + ordinal + " conjunto: ");
-        int tamaño = scanner.nextInt();
-        System.out.println("Ingrese los elementos del " + ordinal + " conjuntos, uno por uno:");
+        int tamaño = sc.nextInt();
+        System.out.println("Ingrese los elementos del " + ordinal + " conjunto, uno por uno (SOLO NUMEROS):");
         for (int i = 0; i < tamaño; i++) {
-            conjunto.add(scanner.nextInt());
+            conjunto.add(MathProject.sc.nextInt());
         }
         return conjunto;
     }
@@ -288,13 +309,7 @@ public class MathProject {
         boolean[][] matrizRelacion = null;
 
         while (continuar) {
-            System.out.println("----- Menú de Opciones: -----");
-            System.out.println("1. Ingresar Relación");
-            System.out.println("2. Mostrar Matriz de Relación");
-            System.out.println("3. Mostrar Tipo de Relación");
-            System.out.println("4. Volver al Menú Principal");
-            System.out.println();
-            System.out.print("Seleccione una opción: ");
+            System.out.println(MENURELACIONES);
 
             int opcion;
             try {
@@ -474,8 +489,9 @@ public class MathProject {
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
-    public static void desition_4(int selection){} // funciones
-    //----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+public static void desition_4(String user){}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public static void clearScreen(){
         for (int i = 0; i < 80; i++) {
@@ -497,5 +513,6 @@ public class MathProject {
         selection = sc.nextInt();
         return selection;
     }
+    
 
 }
