@@ -60,6 +60,8 @@ public class MathProject {
                 break;
             case 4:
                 desition_4(user);
+            case 5:
+                desition_5(user);
         }
     }
     public static void menu1(){
@@ -492,6 +494,7 @@ public class MathProject {
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
+
     public static void desition_4(String user){
          int optionF;
          do {
@@ -499,35 +502,53 @@ public class MathProject {
             optionF = sc.nextInt();
             switch (optionF) {
                 case 1:
-                    System.out.print("Ingrese una funcion f(x) para calcular: ");
-                    sc.nextLine();
-                    String functionF = sc.nextLine();
-                    calculateFunction(functionF);
-                    System.out.println("Presiona la tecla ENTER para volver al menú: ");
-                    sc.nextLine();
-                    clearScreen();
+                    funcionesSeleccion1();
                     break;
                 case 2:
-                    System.out.print("Ingrese una funcion f^-1(x) para calcular: ");
-                    sc.nextLine();
-                    String inverseFunction = sc.nextLine();
-                    calculateInverseFunction(inverseFunction);
+                    funcionesSeleccion2();
                     break;
                 case 3:
-                    System.out.print("Ingrese una funcion para encontrar su dominio, rango e imagen: ");
-                    sc.nextLine();
-                    String function = sc.nextLine();
-                    findDomainRangeImage(function);
+                    funcionesSeleccion3();
                     break;
                 case 4:
-                    clearScreen();
-                    System.out.println("saliendo del programa...");
-                    mensajeDespedida(user);
+                    funcionesSeleccion4();
                     break;
                 default:
                     System.out.println("Opción inválida, por favor, intente de nuevo");
             }
         } while (optionF != 4);
+    }
+    public static void funcionesSeleccion1(){
+        System.out.print("Ingrese una funcion f(x) para calcular: ");
+        sc.nextLine();
+        String functionF = sc.nextLine();
+        calculateFunction(functionF);
+        System.out.println("Presiona la tecla ENTER para volver al menú: ");
+        sc.nextLine();
+        clearScreen();
+    }
+    public static void funcionesSeleccion2(){
+        System.out.print("Ingrese una funcion f^-1(x) para calcular: ");
+        sc.nextLine();
+        String inverseFunction = sc.nextLine();
+        calculateInverseFunction(inverseFunction);
+        System.out.println("Presiona la tecla ENTER para volver al menú: ");
+        sc.nextLine();
+        clearScreen();
+    }
+    public static void funcionesSeleccion3(){
+        System.out.print("Ingrese una funcion para encontrar su dominio, rango e imagen: ");
+        sc.nextLine();
+        String function = sc.nextLine();
+        findDomainRangeImage(function);
+        System.out.println("Presiona la tecla ENTER para volver al menú: ");
+        sc.nextLine();
+        clearScreen();
+    }
+    public static void funcionesSeleccion4(){
+        clearScreen();
+        System.out.println("saliendo del programa...");
+        ciclo_eleccion_menu1(user);
     }
     public static void calculateFunction(String functionF) {
 
@@ -592,6 +613,9 @@ public class MathProject {
         }
     }
      // funciones
+    public static void desition_5(String user){
+        mensajeDespedida(user);
+    }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public static void clearScreen(){
