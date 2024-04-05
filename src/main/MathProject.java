@@ -103,10 +103,11 @@ public class MathProject {
     public static void algoMasFuncion(){
         System.out.println();
         System.out.print("Deseas intentar algo mas? (si/no): ");
-        String bugPregunta2 = sc.nextLine();
+        String bugPregunta = sc.nextLine();
+        System.out.print("Confime su respuesta: ");
         String pregunta2 = sc.nextLine();
 
-        if (bugPregunta2.equalsIgnoreCase("si") || pregunta2.equalsIgnoreCase("si")){
+        if (pregunta2.equalsIgnoreCase("si")){
             inducctionMenu(user);
         }else
             inducctionMenu2(user);
@@ -494,37 +495,35 @@ public class MathProject {
     public static void desition_4(String user){
          int optionF;
          do {
-            System.out.println("Menu Options:");
-            System.out.println("1. Calculate f(x)");
-            System.out.println("2. Calculate f^-1(x)");
-            System.out.println("3. Find Domain, Range, and Image of a function");
-            System.out.println("4. Exit");
-            System.out.print("Select an option: ");
+             clearScreen();
+             System.out.print(MENUFUNCIONES);
             optionF = sc.nextInt();
             switch (optionF) {
                 case 1:
-                    System.out.println("Enter the function f(x) to calculate:");
+                    System.out.print("Ingrese una funcion f(x) para calcular: ");
                     sc.nextLine();
                     String functionF = sc.nextLine();
                     calculateFunction(functionF);
                     break;
                 case 2:
-                    System.out.println("Enter the function f^-1(x) to calculate:");
+                    System.out.print("Ingrese una funcion f^-1(x) para calcular: ");
                     sc.nextLine();
                     String inverseFunction = sc.nextLine();
                     calculateInverseFunction(inverseFunction);
                     break;
                 case 3:
-                    System.out.println("Enter the function to find its domain, range, and image:");
+                    System.out.print("Ingrese una funcion para encontrar su dominio, rango e imagen: ");
                     sc.nextLine();
                     String function = sc.nextLine();
                     findDomainRangeImage(function);
                     break;
                 case 4:
-                    System.out.println("Exiting the program...");
+                    clearScreen();
+                    System.out.println("saliendo del programa...");
+                    mensajeDespedida(user);
                     break;
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println("Opción inválida, por favor, intente de nuevo");
             }
         } while (optionF != 4);
     }
@@ -546,7 +545,11 @@ public class MathProject {
             System.out.println("f(x) = " + functionF);
             System.out.println("f(2) = " + fxValue);
         } else {
-            System.err.println("The function f(x) is not in the correct format.");
+            clearScreen();
+            System.out.println("Presiona la tecla ENTER para volver al menú: ");
+            System.err.println("La funcion f(x) no está en el formato correcto");
+            sc.nextLine();
+            clearScreen();
         }
     }
         public static void calculateInverseFunction(String inverseFunction) {
@@ -579,11 +582,11 @@ public class MathProject {
             }
 
 
-            System.out.println("Domain: " + domain);
-            System.out.println("Range: " + range);
-            System.out.println("Image: " + image);
+            System.out.println("Dominio: " + domain);
+            System.out.println("Rango: " + range);
+            System.out.println("Imagen: " + image);
         } catch (Exception e) {
-            System.err.println("The entered function is not valid. Please try again.");
+            System.err.println("La función ingresada no es válida. Por favor, intente de nuevo.");
         }
     }
      // funciones

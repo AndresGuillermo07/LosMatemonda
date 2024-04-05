@@ -49,9 +49,9 @@ public class LargeTexts {
                 ¡Explora el fascinante mundo de las matemáticas discretas con nuestro programa interactivo!
                 
                 1. Inducción Matemática
-                2. Operaciones con Conjuntos 
+                2. Operaciones con Conjuntos
                 3. Explorar Relaciones
-                4.Funciones Matemáticas
+                4. Funciones Matemáticas
                 _____________________________________________________________________________________________
                 """;
     public static final String INDUCCTION_MENU= """
@@ -73,12 +73,13 @@ public class LargeTexts {
             """;
 
     public static final String MENUCONJUNTOS1 ="""
----- ¿Que deseas realizar a continuacion? ----
-    
-  1. Realizar otra operacion de conjuntos
-  2. Cambiar de tema
-  3. Salir.
-       
+|--------------------------------------------------|
+|  ---- ¿Que deseas realizar a continuacion? ----  |
+|                                                  |
+|  1. Realizar otra operacion de conjuntos         |
+|  2. Cambiar de tema                              |
+|  3. Salir.                                       |
+|--------------------------------------------------|
  elige una opción(1 - 3)
 """;
 
@@ -93,6 +94,16 @@ public class LargeTexts {
 Seleccione una opción:
     
 """;
+
+    public static final String MENUFUNCIONES="""
+    |-------------------------------------------------------|
+    |   ---- Menú de Opciones: ----                         |
+    | 1. Calcular f(x)                                      |
+    | 2. Calcular f^-1(x)                                   |
+    | 3. Encontrar el dominio, rango e imagen de la función |
+    | 4. Volver al menú principal                           |
+    |-------------------------------------------------------|
+    Seleccione una opcón:""";
 
 
 }
