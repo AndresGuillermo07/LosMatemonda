@@ -495,7 +495,6 @@ public class MathProject {
     public static void desition_4(String user){
          int optionF;
          do {
-             clearScreen();
              System.out.print(MENUFUNCIONES);
             optionF = sc.nextInt();
             switch (optionF) {
@@ -504,6 +503,9 @@ public class MathProject {
                     sc.nextLine();
                     String functionF = sc.nextLine();
                     calculateFunction(functionF);
+                    System.out.println("Presiona la tecla ENTER para volver al menú: ");
+                    sc.nextLine();
+                    clearScreen();
                     break;
                 case 2:
                     System.out.print("Ingrese una funcion f^-1(x) para calcular: ");
