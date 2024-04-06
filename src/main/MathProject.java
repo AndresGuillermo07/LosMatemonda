@@ -550,8 +550,30 @@ public class MathProject {
         System.out.println("saliendo del programa...");
         ciclo_eleccion_menu1(user);
     }
-    public static void calculateFunction(String functionF) {
+    public static void calcularFuncion(String funcionF) {
+    Scanner scanner = new Scanner(System.in);
 
+    System.out.print("Ingresa el valor de x: ");
+    double x = scanner.nextDouble();
+
+    String regex = "^(-?\\d+(\\.\\d*)?)[ ]*x[ ]*([+-]\\d+(\\.\\d*)?)$";
+    Pattern pattern = Pattern.compile(regex);
+    Matcher matcher = pattern.matcher(funcionF);
+
+    if (matcher.find()) {
+        double a = Double.parseDouble(matcher.group(1));
+        double b = Double.parseDouble(matcher.group(3));
+
+        double valorFx = a * x + b;
+
+        System.out.println("f(x) = " + funcionF);
+        System.out.println("f(" + x + ") = " + valorFx);
+    } else {
+        System.err.println("La función f(x) no está en el formato correcto.");
+    }
+}
+
+        public static void calculateInverseFunction(String functionF) {
         String regex = "^(-?\\d+(\\.\\d*)?)[ ]*x[ ]*([+-]\\d+(\\.\\d*)?)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(functionF);
@@ -560,34 +582,26 @@ public class MathProject {
             double a = Double.parseDouble(matcher.group(1));
             double b = Double.parseDouble(matcher.group(3));
 
+            if (a == 0) {
+                System.err.println("La función f(x) no es invertible porque el coeficiente de x es cero.");
+                return;
+            }
 
-            double x = 2;
-            double fxValue = a * x + b;
+            double inverseA = 1 / a;
+            double inverseB = -b / a;
 
+            String inverseFunction;
+            if (a > 0) {
+                inverseFunction = "(x + " + (-b) + ") / " + a;
+            } else {
+                inverseFunction = "(" + b + " - x) / " + (-a);
+            }
 
             System.out.println("f(x) = " + functionF);
-            System.out.println("f(2) = " + fxValue);
+            System.out.println("f^-1(x) = " + inverseFunction);
         } else {
-            clearScreen();
-            System.out.println("Presiona la tecla ENTER para volver al menú: ");
-            System.err.println("La funcion f(x) no está en el formato correcto");
-            sc.nextLine();
-            clearScreen();
+            System.err.println("La función f(x) no tiene el formato correcto (función lineal de la forma ax + b).");
         }
-    }
-        public static void calculateInverseFunction(String inverseFunction) {
-
-        String[] fxinv = inverseFunction.split("x");
-        double c = Double.parseDouble(fxinv[0]);
-        double d = Double.parseDouble(fxinv[1]);
-
-
-        double y = 5;
-        double fxinvValue = c * y + d;
-
-
-        System.out.println("f^-1(x) = " + inverseFunction);
-        System.out.println("f^-1(5) = " + fxinvValue);
     }
      public static void findDomainRangeImage(String function) {
         try {
